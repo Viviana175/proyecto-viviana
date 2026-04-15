@@ -1,0 +1,105 @@
+[
+  {
+    "keywords": [
+      "IA",
+      "programa de computación",
+      "diferencia"
+    ],
+    "answers": [
+      "Un programa normal sigue una lista de instrucciones fijas (si pasa A, haz B). La IA aprende de los datos; no se le dan todas las reglas, sino que ella misma identifica patrones para tomar decisiones o generar predicciones ante situaciones nuevas."
+    ]
+  },
+  {
+    "keywords": [
+      "Machine Learning",
+      "IA",
+      "aprendizaje automático"
+    ],
+    "answers": [
+      "Es una rama de la IA que permite que las máquinas aprendan por sí solas. En lugar de escribir código para cada tarea, le das al sistema miles de ejemplos (datos) y el algoritmo mejora su precisión con el tiempo mediante la experiencia."
+    ]
+  },
+  {
+    "keywords": [
+      "IA",
+      "sentimientos",
+      "conciencia"
+    ],
+    "answers": [
+      "No. En 2026, la IA sigue siendo IA Estrecha. Aunque puede simular empatía o escribir poemas conmovedores, no tiene conciencia, emociones ni alma. Son cálculos matemáticos avanzados procesando lenguaje y probabilidades."
+    ]
+  },
+  {
+    "keywords": [
+      "Prompt",
+      "IA",
+      "importancia"
+    ],
+    "answers": [
+      "Un Prompt es la instrucción que le das a una IA como ChatGPT o Midjourney. Se ha convertido en una habilidad esencial porque la calidad de lo que la IA entrega depende directamente de qué tan clara, específica y contextual sea la orden que tú le des."
+    ]
+  },
+  {
+    "keywords": [
+      "IA",
+      "trabajos",
+      "reemplazar"
+    ],
+    "answers": [
+      "Más que reemplazarlos, los está transformando. La IA se encarga de las tareas repetitivas y el análisis de datos masivos, lo que obliga a los humanos a enfocarse en el pensamiento crítico, la creatividad y la supervisión ética de estas herramientas."
+    ]
+  },
+  {
+    "keywords": [
+      "IA",
+      "alucina",
+      "inventa",
+      "información"
+    ],
+    "answers": [
+      "Las alucinaciones ocurren porque los modelos de lenguaje están diseñados para predecir la siguiente palabra más probable, no para verificar la verdad. Si no tienen el dato exacto, el sistema puede generar una respuesta que suena lógica pero es falsa."
+    ]
+  },
+  {
+    "keywords": [
+      "sesgo algorítmico",
+      "IA",
+      "prejuicios"
+    ],
+    "answers": [
+      "Es cuando una IA toma decisiones injustas, por ejemplo en procesos de contratación. Esto sucede porque la IA se entrena con datos históricos que ya contienen prejuicios humanos. Si los datos están mal, la IA heredará esos errores."
+    ]
+  },
+  {
+    "keywords": [
+      "IA Débil",
+      "IA Fuerte",
+      "ANI",
+      "AGI"
+    ],
+    "answers": [
+      "La IA Débil o ANI está diseñada para una tarea específica como jugar ajedrez o traducir textos, y es la que usamos hoy. La IA Fuerte o AGI es una máquina que igualaría la inteligencia humana en cualquier área, pero todavía es teórica."
+    ]
+  },
+  {
+    "keywords": [
+      "IA",
+      "medio ambiente",
+      "consumo de energía",
+      "IA Verde"
+    ],
+    "answers": [
+      "Entrenar y mantener grandes modelos de IA requiere una potencia de cómputo inmensa, lo que genera un alto consumo de energía y agua para enfriar los servidores. Por eso en 2026 la IA Verde o sostenible es una prioridad de desarrollo."
+    ]
+  },
+  {
+    "keywords": [
+      "seguridad",
+      "datos",
+      "IA"
+    ],
+    "answers": [
+      "Depende de la plataforma. La mayoría de las IAs utilizan tus conversaciones para seguir aprendiendo, por lo que nunca se debe compartir información sensible, financiera o privada a menos que estés en un entorno empresarial con protección de datos garantizada."
+    ]
+  }
+]

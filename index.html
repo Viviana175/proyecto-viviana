@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Página informativa sobre Inteligencia Artificial: qué es, sus tipos, aplicaciones y el futuro de la IA." />
+  <meta name="keywords"
+    content="inteligencia artificial, IA, machine learning, deep learning, redes neuronales, futuro de la IA" />
+  <title>IA Universe — El Universo de la Inteligencia Artificial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-icon">⬢</span>
+        <span>SYS//IA_UNIVERSE</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#que-es" class="nav-link">¿Qué es la IA?</a></li>
+        <li><a href="#tipos" class="nav-link">Tipos</a></li>
+        <li><a href="#aplicaciones" class="nav-link">Aplicaciones</a></li>
+        <li><a href="#tecnologias" class="nav-link">Tecnologías</a></li>
+        <li><a href="#futuro" class="nav-link">Futuro</a></li>
+        <li><a href="#estadisticas" class="nav-link">Estadísticas</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <canvas id="neuralCanvas"></canvas>
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span style="font-family: var(--font-mono);">STATUS: OPTIMIZED_CORE_ACTIVE</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="gradient-text">NEURAL_IA</span><br />
+        <span class="gradient-text">INTELLIGENCE</span>
+      </h1>
+      <p class="hero-subtitle">
+        SISTEMA DE DIVULGACIÓN TÉCNICA: PROCESANDO DATOS SOBRE EL FUTURO DE LA COGNICIÓN SINTÉTICA...
+      </p>
+      <div class="hero-actions">
+        <a href="#que-es" class="btn-primary">
+          Comenzar exploración
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#estadisticas" class="btn-outline">Ver estadísticas</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">B+</span>
+          <span class="stat-label">Inversión global (USD)</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="97">0</span><span class="stat-suffix">%</span>
+          <span class="stat-label">Precisión en reconocimiento de imágenes</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="10000">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Startups de IA activas</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-mouse"></div>
+      <span>Desplaza para descubrir</span>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ ES LA IA ===== -->
+  <section id="que-es" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Fundamentos</span>
+        <h2 class="section-title">¿Qué es la Inteligencia Artificial?</h2>
+        <p class="section-description">
+          La Inteligencia Artificial es la capacidad de las máquinas para imitar
+          funciones cognitivas humanas como el aprendizaje, el razonamiento y la resolución de problemas.
+        </p>
+      </div>
+      <div class="what-grid">
+        <div class="what-card reveal" style="--delay: 0.1s">
+          <div class="card-icon">🧠</div>
+          <h3>Aprendizaje Automático</h3>
+          <p>Los sistemas de IA aprenden de los datos sin ser explícitamente programados, mejorando su rendimiento con
+            la experiencia.</p>
+        </div>
+        <div class="what-card reveal" style="--delay: 0.2s">
+          <div class="card-icon">👁️</div>
+          <h3>Percepción Visual</h3>
+          <p>Capacidad para interpretar y comprender imágenes y video, igual o mejor que el ojo humano en muchos
+            contextos.</p>
+        </div>
+        <div class="what-card reveal" style="--delay: 0.3s">
+          <div class="card-icon">💬</div>
+          <h3>Procesamiento del Lenguaje</h3>
+          <p>Comprensión, interpretación y generación de lenguaje humano con una fluidez cada vez más natural.</p>
+        </div>
+        <div class="what-card reveal" style="--delay: 0.4s">
+          <div class="card-icon">⚡</div>
+          <h3>Toma de Decisiones</h3>
+          <p>Algoritmos que evalúan escenarios complejos y recomiendan o ejecutan acciones de forma autónoma.</p>
+        </div>
+      </div>
+      <div class="timeline reveal">
+        <h3 class="timeline-title">Línea del tiempo de la IA</h3>
+        <div class="timeline-items">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">1956</span>
+              <p>Nace el término "Inteligencia Artificial" en la Conferencia de Dartmouth.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">1997</span>
+              <p>Deep Blue de IBM derrota al campeón mundial de ajedrez Garry Kasparov.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2012</span>
+              <p>AlexNet revoluciona el reconocimiento de imágenes con redes neuronales profundas.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2017</span>
+              <p>Transformers cambian el paradigma del procesamiento del lenguaje natural.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2022</span>
+              <p>ChatGPT lanza la era de los Modelos de Lenguaje Grande accesibles al público.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot active"></div>
+            <div class="timeline-content">
+              <span class="timeline-year">2025+</span>
+              <p>IA multimodal, agentes autónomos y razonamiento avanzado marcan el presente.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIPOS DE IA ===== -->
+  <section id="tipos" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Clasificación</span>
+        <h2 class="section-title">Tipos de Inteligencia Artificial</h2>
+        <p class="section-description">Desde sistemas especializados hasta la visión de una IA general, existen
+          distintas categorías que definen el alcance de estas tecnologías.</p>
+      </div>
+      <div class="types-container">
+        <div class="type-tabs">
+          <button class="tab-btn active" data-tab="narrow">IA Estrecha (ANI)</button>
+          <button class="tab-btn" data-tab="general">IA General (AGI)</button>
+          <button class="tab-btn" data-tab="super">Super IA (ASI)</button>
+          <button class="tab-btn" data-tab="reactive">IA Reactiva</button>
+          <button class="tab-btn" data-tab="limited">Memoria Limitada</button>
+          <button class="tab-btn" data-tab="theory">Teoría de la Mente</button>
+        </div>
+        <div class="tab-content">
+          <div class="tab-panel active" id="tab-narrow">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">🎯</div>
+              <div class="tab-text">
+                <h3>IA Estrecha (Artificial Narrow Intelligence)</h3>
+                <p>Es la IA que conocemos hoy en día. Está diseñada y entrenada para realizar una única tarea específica
+                  mejor que cualquier humano, pero carece de la capacidad de generalizar a otros dominios.</p>
+                <ul class="feature-list">
+                  <li>Reconocimiento de voz y facial</li>
+                  <li>Motores de recomendación (Netflix, Spotify)</li>
+                  <li>Filtros de spam y detección de fraudes</li>
+                  <li>Asistentes virtuales (Siri, Alexa)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="tab-general">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">🌐</div>
+              <div class="tab-text">
+                <h3>IA General (Artificial General Intelligence)</h3>
+                <p>Un sistema hipotético con la capacidad cognitiva de un ser humano, capaz de aprender, razonar y
+                  resolver problemas en cualquier dominio con la misma versatilidad que una persona.</p>
+                <ul class="feature-list">
+                  <li>Aún no existe en la actualidad</li>
+                  <li>Objetivo de investigación a largo plazo</li>
+                  <li>Implica razonamiento abstracto y creatividad</li>
+                  <li>Adaptación a entornos completamente nuevos</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="tab-super">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">🚀</div>
+              <div class="tab-text">
+                <h3>Super IA (Artificial Superintelligence)</h3>
+                <p>Un concepto teórico de una IA que supera con creces la inteligencia humana en todos los campos —
+                  científico, social, emocional y creativo. Representa el escenario más especulativo del futuro.</p>
+                <ul class="feature-list">
+                  <li>Concepto puramente teórico-especulativo</li>
+                  <li>Objeto de debate ético y filosófico intenso</li>
+                  <li>Podría resolver problemas globales en segundos</li>
+                  <li>Analizada por investigadores de seguridad en IA</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="tab-reactive">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">⚡</div>
+              <div class="tab-text">
+                <h3>IA Reactiva</h3>
+                <p>El tipo más básico de IA. Percibe el mundo directamente y actúa según lo que ve, sin utilizar memoria
+                  ni experiencias pasadas para informar sus decisiones.</p>
+                <ul class="feature-list">
+                  <li>Deep Blue (ajedrez de IBM, 1997)</li>
+                  <li>No almacena memoria de interacciones</li>
+                  <li>Altamente especializada y predecible</li>
+                  <li>Respuestas siempre consistentes al mismo input</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="tab-limited">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">💾</div>
+              <div class="tab-text">
+                <h3>IA de Memoria Limitada</h3>
+                <p>Puede usar experiencias pasadas para informar decisiones futuras. La mayoría de las aplicaciones de
+                  IA actuales, incluidos los coches autónomos, pertenecen a esta categoría.</p>
+                <ul class="feature-list">
+                  <li>Vehículos autónomos (Tesla Autopilot)</li>
+                  <li>ChatGPT y modelos conversacionales</li>
+                  <li>Algoritmos de trading financiero</li>
+                  <li>Sistemas de diagnóstico médico</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="tab-theory">
+            <div class="tab-panel-inner">
+              <div class="tab-icon">🤔</div>
+              <div class="tab-text">
+                <h3>IA con Teoría de la Mente</h3>
+                <p>Un nivel avanzado (actualmente en investigación) donde la IA podría comprender emociones, creencias e
+                  intenciones humanas, permitiendo interacciones verdaderamente sociales y empáticas.</p>
+                <ul class="feature-list">
+                  <li>Actualmente en fase de investigación</li>
+                  <li>Comprendería emociones y contexto social</li>
+                  <li>Ajustaría comportamiento según estado mental</li>
+                  <li>Base para robots sociales avanzados</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== APLICACIONES ===== -->
+  <section id="aplicaciones" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Impacto Real</span>
+        <h2 class="section-title">Aplicaciones de la IA en el Mundo Real</h2>
+        <p class="section-description">La IA está presente en prácticamente todos los sectores, transformando la manera
+          en que trabajamos, vivimos y nos relacionamos.</p>
+      </div>
+      <div class="apps-grid">
+        <div class="app-card reveal" style="--delay: 0.05s; --card-color: #6366f1;">
+          <div class="app-card-inner">
+            <div class="app-icon">🏥</div>
+            <h3>Salud y Medicina</h3>
+            <p>Diagnóstico de enfermedades por imágenes médicas, descubrimiento de medicamentos, cirugías asistidas por
+              robots y monitoreo continuo de pacientes.</p>
+            <div class="app-examples">
+              <span>DeepMind</span>
+              <span>IBM Watson Health</span>
+              <span>PathAI</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-card reveal" style="--delay: 0.1s; --card-color: #8b5cf6;">
+          <div class="app-card-inner">
+            <div class="app-icon">🚗</div>
+            <h3>Transporte Autónomo</h3>
+            <p>Vehículos que se conducen solos integrando visión por computadora, LiDAR y modelos de toma de decisiones
+              en tiempo real para navegar entornos complejos.</p>
+            <div class="app-examples">
+              <span>Tesla FSD</span>
+              <span>Waymo</span>
+              <span>Aurora</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-card reveal" style="--delay: 0.15s; --card-color: #06b6d4;">
+          <div class="app-card-inner">
+            <div class="app-icon">📊</div>
+            <h3>Finanzas y Mercados</h3>
+            <p>Detección de fraudes en tiempo real, trading algorítmico, evaluación crediticia personalizada y gestión
+              de riesgos financieros complejos.</p>
+            <div class="app-examples">
+              <span>Stripe Radar</span>
+              <span>Palantir</span>
+              <span>Kensho</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-card reveal" style="--delay: 0.2s; --card-color: #10b981;">
+          <div class="app-card-inner">
+            <div class="app-icon">🎓</div>
+            <h3>Educación</h3>
+            <p>Tutores virtuales adaptativos que personalizan el contenido según el ritmo y estilo de aprendizaje de
+              cada estudiante, mejorando resultados pedagógicos.</p>
+            <div class="app-examples">
+              <span>Khan Academy AI</span>
+              <span>Duolingo</span>
+              <span>Carnegie Learning</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-card reveal" style="--delay: 0.25s; --card-color: #f59e0b;">
+          <div class="app-card-inner">
+            <div class="app-icon">🌿</div>
+            <h3>Medio Ambiente</h3>
+            <p>Predicción climática avanzada, optimización del consumo energético, monitoreo de ecosistemas y
+              aceleración del desarrollo de energías renovables.</p>
+            <div class="app-examples">
+              <span>Google DeepMind</span>
+              <span>ClimateAI</span>
+              <span>Microsoft AI4Earth</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-card reveal" style="--delay: 0.3s; --card-color: #ef4444;">
+          <div class="app-card-inner">
+            <div class="app-icon">🎨</div>
+            <h3>Creatividad y Arte</h3>
+            <p>Generación de imágenes, música y texto con calidad profesional, abriendo nuevas posibilidades para
+              artistas y democratizando la creación de contenido.</p>
+            <div class="app-examples">
+              <span>DALL·E 3</span>
+              <span>Midjourney</span>
+              <span>Suno AI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECNOLOGÍAS ===== -->
+  <section id="tecnologias" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Stack Tecnológico</span>
+        <h2 class="section-title">Tecnologías que Impulsan la IA</h2>
+        <p class="section-description">Un ecosistema complejo de disciplinas, algoritmos y hardware se combinan para
+          hacer posible la inteligencia artificial moderna.</p>
+      </div>
+      <div class="tech-bento reveal">
+        <div class="bento-card bento-large">
+          <div class="bento-icon">🔬</div>
+          <h3>Machine Learning</h3>
+          <p>Rama central de la IA donde los algoritmos aprenden a partir de datos para hacer predicciones o tomar
+            decisiones sin ser programados explícitamente.</p>
+          <div class="skill-bars">
+            <div class="skill-bar">
+              <span>Supervisado</span>
+              <div class="bar">
+                <div class="bar-fill" style="--width: 90%; --color: #6366f1;"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span>No Supervisado</span>
+              <div class="bar">
+                <div class="bar-fill" style="--width: 75%; --color: #8b5cf6;"></div>
+              </div>
+            </div>
+            <div class="skill-bar">
+              <span>Refuerzo</span>
+              <div class="bar">
+                <div class="bar-fill" style="--width: 82%; --color: #06b6d4;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">🕸️</div>
+          <h3>Redes Neuronales</h3>
+          <p>Sistemas inspirados en el cerebro humano compuestos por capas de nodos interconectados que procesan
+            información en paralelo.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">🌊</div>
+          <h3>Deep Learning</h3>
+          <p>Redes neuronales con muchas capas ocultas capaces de aprender representaciones jerárquicas de datos
+            complejos como imágenes o audio.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">🔄</div>
+          <h3>Transformers</h3>
+          <p>Arquitectura revolucionaria basada en mecanismos de atención, fundamento de GPT, BERT y la mayoría de los
+            modelos de lenguaje modernos.</p>
+        </div>
+        <div class="bento-card bento-wide">
+          <div class="bento-icon">💻</div>
+          <h3>Hardware & Infraestructura</h3>
+          <p>El poder de la IA moderna depende de GPUs, TPUs y chips especializados que procesan billones de operaciones
+            por segundo.</p>
+          <div class="chips-grid">
+            <div class="chip-item">NVIDIA H100</div>
+            <div class="chip-item">Google TPU v4</div>
+            <div class="chip-item">AWS Inferentia</div>
+            <div class="chip-item">Apple Neural Engine</div>
+          </div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">📝</div>
+          <h3>NLP</h3>
+          <p>Procesamiento del Lenguaje Natural que permite a las máquinas leer, traducir, resumir y generar texto
+            coherente.</p>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">👁️‍🗨️</div>
+          <h3>Visión por Computadora</h3>
+          <p>Sistemas que pueden identificar objetos, detectar emociones y analizar escenas visuales con alta precisión.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FUTURO ===== -->
+  <section id="futuro" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Lo que viene</span>
+        <h2 class="section-title">El Futuro de la Inteligencia Artificial</h2>
+        <p class="section-description">Nos encontramos en el umbral de una revolución tecnológica sin precedentes, donde
+          la IA redefinirá nuestra relación con el conocimiento y la creatividad.</p>
+      </div>
+      <div class="future-grid">
+        <div class="future-card reveal" style="--delay: 0.1s">
+          <div class="future-year">2025–2027</div>
+          <div class="future-icon">🤖</div>
+          <h3>Agentes Autónomos</h3>
+          <p>IAs que no solo responden preguntas sino que planifican, ejecutan tareas complejas y se coordinan entre sí
+            para alcanzar objetivos de alto nivel.</p>
+          <div class="future-probability">
+            <span>Probabilidad</span>
+            <div class="probability-bar">
+              <div class="probability-fill" style="--width: 85%;"></div>
+            </div>
+            <span>85%</span>
+          </div>
+        </div>
+        <div class="future-card reveal" style="--delay: 0.2s">
+          <div class="future-year">2027–2030</div>
+          <div class="future-icon">🧬</div>
+          <h3>IA en Biotecnología</h3>
+          <p>Aceleración masiva del descubrimiento de medicamentos, diseño de proteínas y terapias personalizadas que
+            podrían erradicar enfermedades hoy incurables.</p>
+          <div class="future-probability">
+            <span>Probabilidad</span>
+            <div class="probability-bar">
+              <div class="probability-fill" style="--width: 78%;"></div>
+            </div>
+            <span>78%</span>
+          </div>
+        </div>
+        <div class="future-card reveal" style="--delay: 0.3s">
+          <div class="future-year">2030–2035</div>
+          <div class="future-icon">⚛️</div>
+          <h3>IA + Computación Cuántica</h3>
+          <p>La fusión con computadoras cuánticas exponenciará las capacidades de la IA, resolviendo problemas de
+            optimización y simulación imposibles con hardware clásico.</p>
+          <div class="future-probability">
+            <span>Probabilidad</span>
+            <div class="probability-bar">
+              <div class="probability-fill" style="--width: 60%;"></div>
+            </div>
+            <span>60%</span>
+          </div>
+        </div>
+        <div class="future-card reveal" style="--delay: 0.4s">
+          <div class="future-year">2035+</div>
+          <div class="future-icon">🌌</div>
+          <h3>AGI: IA General</h3>
+          <p>El hito más transformador y debatido: una inteligencia artificial que iguala o supera las capacidades
+            cognitivas humanas en todos los dominios del conocimiento.</p>
+          <div class="future-probability">
+            <span>Probabilidad</span>
+            <div class="probability-bar">
+              <div class="probability-fill" style="--width: 42%;"></div>
+            </div>
+            <span>42%</span>
+          </div>
+        </div>
+      </div>
+      <div class="ethics-box reveal">
+        <div class="ethics-icon">⚖️</div>
+        <div class="ethics-content">
+          <h3>Ética e IA Responsable</h3>
+          <p>El avance tecnológico viene acompañado de responsabilidades críticas: sesgo algorítmico, privacidad de
+            datos, impacto laboral y seguridad. Las organizaciones líderes y gobiernos trabajan en marcos regulatorios
+            para garantizar que la IA beneficie a toda la humanidad.</p>
+          <div class="ethics-tags">
+            <span>Transparencia</span>
+            <span>Equidad</span>
+            <span>Privacidad</span>
+            <span>Seguridad</span>
+            <span>Responsabilidad</span>
+            <span>Inclusión</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ESTADÍSTICAS ===== -->
+  <section id="estadisticas" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Datos y Cifras</span>
+        <h2 class="section-title">La IA en Números</h2>
+        <p class="section-description">El crecimiento de la inteligencia artificial en cifras que demuestran su impacto
+          global y su trayectoria.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stats-card reveal" style="--delay: 0.05s">
+          <div class="stats-number counter" data-target="4" data-decimal="true">0</div>
+          <div class="stats-unit">Trillones USD</div>
+          <div class="stats-label">Contribución estimada al PIB mundial para 2035</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 80%; --color: #6366f1;"></div>
+          </div>
+        </div>
+        <div class="stats-card reveal" style="--delay: 0.1s">
+          <div class="stats-number counter" data-target="77">0</div>
+          <div class="stats-unit">%</div>
+          <div class="stats-label">De los dispositivos de consumo utilizan alguna forma de IA</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 77%; --color: #8b5cf6;"></div>
+          </div>
+        </div>
+        <div class="stats-card reveal" style="--delay: 0.15s">
+          <div class="stats-number counter" data-target="300">0</div>
+          <div class="stats-unit">M+</div>
+          <div class="stats-label">Empleos afectados por la automatización inteligente a nivel global</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 65%; --color: #06b6d4;"></div>
+          </div>
+        </div>
+        <div class="stats-card reveal" style="--delay: 0.2s">
+          <div class="stats-number counter" data-target="200">0</div>
+          <div class="stats-unit">B+</div>
+          <div class="stats-label">Tokens procesados diariamente solo por los modelos de OpenAI</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 90%; --color: #10b981;"></div>
+          </div>
+        </div>
+        <div class="stats-card reveal" style="--delay: 0.25s">
+          <div class="stats-number counter" data-target="91">0</div>
+          <div class="stats-unit">%</div>
+          <div class="stats-label">De las empresas líderes tienen estrategias de IA activas en curso</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 91%; --color: #f59e0b;"></div>
+          </div>
+        </div>
+        <div class="stats-card reveal" style="--delay: 0.3s">
+          <div class="stats-number counter" data-target="44">0</div>
+          <div class="stats-unit">%</div>
+          <div class="stats-label">Reducción promedio en costos operativos con adopción de IA</div>
+          <div class="stats-bar">
+            <div class="stats-fill" style="--width: 44%; --color: #ef4444;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="#hero" class="footer-logo">
+            <span class="logo-icon">⬡</span>
+            <span>IA Universe</span>
+          </a>
+          <p>Una exploración del universo de la Inteligencia Artificial, sus fundamentos, aplicaciones y el futuro que
+            nos aguarda.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#que-es">¿Qué es la IA?</a></li>
+            <li><a href="#tipos">Tipos de IA</a></li>
+            <li><a href="#aplicaciones">Aplicaciones</a></li>
+            <li><a href="#tecnologias">Tecnologías</a></li>
+            <li><a href="#futuro">Futuro</a></li>
+            <li><a href="#estadisticas">Estadísticas</a></li>
+          </ul>
+        </div>
+        <div class="footer-info">
+          <h4>Recursos destacados</h4>
+          <ul>
+            <li><a href="https://openai.com" target="_blank" rel="noopener">OpenAI</a></li>
+            <li><a href="https://deepmind.google" target="_blank" rel="noopener">Google DeepMind</a></li>
+            <li><a href="https://ai.meta.com" target="_blank" rel="noopener">Meta AI</a></li>
+            <li><a href="https://huggingface.co" target="_blank" rel="noopener">Hugging Face</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 IA Universe — Página informativa educativa sobre Inteligencia Artificial.</p>
+        <p>Creado con HTML5, CSS3 y JavaScript moderno.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+
+  <!-- ===== CHATBOT INTERFACE ===== -->
+  <div class="chat-wrapper" id="chatWrapper">
+    <div class="chat-window cyber-card" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-status">
+          <span class="status-dot"></span>
+          <span class="status-text">AI//ASSISTANT_V2</span>
+        </div>
+        <button class="chat-close" id="chatClose">×</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+          <div class="message-content">SISTEMA INICIALIZADO. Soy el asistente de IA Universe. ¿En qué puedo ayudarte
+            hoy?</div>
+          <div class="message-time">JUSTO AHORA</div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="ESCRIBE TU CONSULTA..." autocomplete="off">
+        <button id="chatSend">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <button class="chat-toggle" id="chatToggle">
+      <span class="toggle-icon">💬</span>
+      <span class="toggle-label">CONSULTA_IA</span>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
