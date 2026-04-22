@@ -66,3 +66,30 @@ R: Es la IA que usa experiencias pasadas recientes para tomar decisiones. La may
 ---
 P: Ética e IA Responsable
 R: El avance de la IA trae retos como el sesgo algorítmico, la privacidad, el impacto laboral y la seguridad. Es fundamental desarrollar marcos regulatorios basados en transparencia, equidad e inclusión para que la IA beneficie a todos.
+---
+P: Línea del tiempo de la IA eventos importantes historia
+R: Algunos hitos importantes: 1956 (Nace el término en Dartmouth), 1997 (Deep Blue derrota a Kasparov), 2012 (AlexNet revoluciona visión artificial), 2017 (Transformers cambian el NLP), 2022 (ChatGPT inicia la era de los LLM), y 2025+ (IA multimodal y agentes autónomos).
+---
+P: ¿Qué es la Super IA o ASI?
+R: La Super IA (Artificial Superintelligence) es un concepto teórico de una IA que supera con creces la inteligencia humana en todos los campos (científico, social, emocional y creativo). Podría resolver problemas globales en segundos.
+---
+P: Aplicaciones de la IA en Educación
+R: La IA se usa en tutores virtuales adaptativos que personalizan el contenido según el ritmo del estudiante, mejorando los resultados pedagógicos. Ejemplos incluyen Khan Academy AI, Duolingo y Carnegie Learning.
+---
+P: Aplicaciones de la IA en Creatividad y Arte imágenes música
+R: La IA permite la generación de imágenes, música y texto con calidad profesional, democratizando la creación de contenido. Ejemplos destacados son DALL·E 3, Midjourney y Suno AI.
+---
+P: ¿Qué es el NLP o Procesamiento del Lenguaje Natural?
+R: El NLP (Natural Language Processing) es la tecnología que permite a las máquinas leer, comprender, traducir, resumir y generar texto humano de manera coherente y natural.
+---
+P: ¿Qué es la Visión por Computadora? imágenes
+R: Es la capacidad de los sistemas de IA para identificar objetos, detectar emociones y analizar escenas visuales en imágenes y videos con alta precisión, a menudo superando al ojo humano.
+---
+P: Probabilidad de futuros avances en IA proyecciones
+R: Según estimaciones, la llegada de Agentes Autónomos tiene un 85% de probabilidad (2025-2027), la IA en Biotecnología un 78% (2027-2030), la integración con Computación Cuántica un 60% (2030-2035) y la AGI un 42% (2035+).
+---
+P: Estadísticas de impacto económico y laboral de la IA empleos PIB costos
+R: La IA contribuirá con 4 trillones de dólares al PIB mundial para 2035. Se estima que más de 300 millones de empleos serán afectados por la automatización inteligente, y las empresas reportan una reducción promedio del 44% en costos operativos.
+---
+P: Datos sobre la adopción actual de la IA uso tokens empresas
+R: El 77% de los dispositivos de consumo ya utilizan alguna forma de IA. Además, el 91% de las empresas líderes tienen estrategias de IA activas, y solo los modelos de OpenAI procesan más de 200 billones de tokens diariamente.
