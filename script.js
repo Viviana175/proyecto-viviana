@@ -216,55 +216,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
   const TOP_K        = 3; // fragmentos a recuperar
 
-  // ── Base de conocimientos (dat.json embebida) ───────────────
-  // Cada entrada se convierte en un "documento" para el Retriever
-  const knowledgeBase = [
-    {
-      keywords: ['IA', 'programa de computación', 'diferencia'],
-      answer: 'Un programa normal sigue una lista de instrucciones fijas (si pasa A, haz B). La IA aprende de los datos; no se le dan todas las reglas, sino que ella misma identifica patrones para tomar decisiones o generar predicciones ante situaciones nuevas.'
-    },
-    {
-      keywords: ['Machine Learning', 'aprendizaje automático', 'máquinas aprenden'],
-      answer: 'Es una rama de la IA que permite que las máquinas aprendan por sí solas. En lugar de escribir código para cada tarea, le das al sistema miles de ejemplos (datos) y el algoritmo mejora su precisión con el tiempo mediante la experiencia.'
-    },
-    {
-      keywords: ['IA', 'sentimientos', 'conciencia', 'emociones', 'alma'],
-      answer: 'No. En 2026, la IA sigue siendo IA Estrecha. Aunque puede simular empatía o escribir poemas conmovedores, no tiene conciencia, emociones ni alma. Son cálculos matemáticos avanzados procesando lenguaje y probabilidades.'
-    },
-    {
-      keywords: ['Prompt', 'importancia', 'instrucción', 'ChatGPT', 'Midjourney'],
-      answer: 'Un Prompt es la instrucción que le das a una IA como ChatGPT o Midjourney. Se ha convertido en una habilidad esencial porque la calidad de lo que la IA entrega depende directamente de qué tan clara, específica y contextual sea la orden que tú le des.'
-    },
-    {
-      keywords: ['trabajos', 'reemplazar', 'empleo', 'automatización', 'futuro laboral'],
-      answer: 'Más que reemplazarlos, los está transformando. La IA se encarga de las tareas repetitivas y el análisis de datos masivos, lo que obliga a los humanos a enfocarse en el pensamiento crítico, la creatividad y la supervisión ética de estas herramientas.'
-    },
-    {
-      keywords: ['alucina', 'inventa', 'información falsa', 'alucinaciones', 'errores'],
-      answer: 'Las alucinaciones ocurren porque los modelos de lenguaje están diseñados para predecir la siguiente palabra más probable, no para verificar la verdad. Si no tienen el dato exacto, el sistema puede generar una respuesta que suena lógica pero es falsa.'
-    },
-    {
-      keywords: ['sesgo algorítmico', 'prejuicios', 'discriminación', 'injusto', 'bias'],
-      answer: 'Es cuando una IA toma decisiones injustas, por ejemplo en procesos de contratación. Esto sucede porque la IA se entrena con datos históricos que ya contienen prejuicios humanos. Si los datos están mal, la IA heredará esos errores.'
-    },
-    {
-      keywords: ['IA Débil', 'IA Fuerte', 'ANI', 'AGI', 'Artificial General Intelligence'],
-      answer: 'La IA Débil o ANI está diseñada para una tarea específica como jugar ajedrez o traducir textos, y es la que usamos hoy. La IA Fuerte o AGI es una máquina que igualaría la inteligencia humana en cualquier área, pero todavía es teórica.'
-    },
-    {
-      keywords: ['medio ambiente', 'energía', 'sostenible', 'IA Verde', 'consumo energético'],
-      answer: 'Entrenar y mantener grandes modelos de IA requiere una potencia de cómputo inmensa, lo que genera un alto consumo de energía y agua para enfriar los servidores. Por eso en 2026 la IA Verde o sostenible es una prioridad de desarrollo.'
-    },
-    {
-      keywords: ['seguridad', 'datos', 'privacidad', 'información sensible', 'compartir'],
-      answer: 'Depende de la plataforma. La mayoría de las IAs utilizan tus conversaciones para seguir aprendiendo, por lo que nunca se debe compartir información sensible, financiera o privada a menos que estés en un entorno empresarial con protección de datos garantizada.'
-    }
-  ];
+  // ── Base de conocimientos externa (conocimiento.txt) ───────────────
+  let knowledgeBase = [];
+  let corpus = [];
+  let docVectors = [];
+  let idf = {};
 
-  // Construir corpus de texto para cada documento
-  const corpus = knowledgeBase.map(entry =>
-    (entry.keywords.join(' ') + ' ' + entry.answer).toLowerCase()
-  );
+  // Cargar base de conocimientos dinámicamente
+  fetch('conocimiento.txt')
+    .then(response => response.text())
+    .then(text => {
+      const blocks = text.split('---').map(b => b.trim()).filter(b => b);
+      blocks.forEach(block => {
+        const lines = block.split('\n');
+        let keywords = [];
+        let answer = '';
+        lines.forEach(line => {
+          line = line.trim();
+          if (line.startsWith('P:')) keywords = [line.substring(2).trim()];
+          else if (line.startsWith('R:')) answer = line.substring(2).trim();
+        });
+        if (keywords.length > 0 && answer) {
+          knowledgeBase.push({ keywords, answer });
+        }
+      });
+      corpus = knowledgeBase.map(entry => (entry.keywords.join(' ') + ' ' + entry.answer).toLowerCase());
+      const tfidf = buildTFIDF(corpus);
+      docVectors = tfidf.vectors;
+      idf = tfidf.idf;
+      console.log('Base de conocimientos cargada externamente:', knowledgeBase.length, 'entradas.');
+    })
+    .catch(err => console.error('Error cargando conocimiento.txt:', err));
 
   // ── MÓDULO 1: RETRIEVER (TF-IDF + Cosine Similarity) ───────
 
@@ -334,8 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return (mag1 && mag2) ? dot / (mag1 * mag2) : 0;
   }
 
-  // Pre-indexar el corpus
-  const { vectors: docVectors, idf } = buildTFIDF(corpus);
+  // El corpus se pre-indexa dinámicamente tras cargar conocimiento.txt
 
   function retrieve(question, topK = TOP_K) {
     const qVec = vectorizeQuery(question, idf);
