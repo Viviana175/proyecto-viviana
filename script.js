@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.getElementById('navLinks');
   const navLinksItems = document.querySelectorAll('.nav-link');
 
-  // Sticky Navbar on Scroll
   window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
       navbar.classList.add('scrolled');
@@ -15,13 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
     trackActiveSection();
   });
 
-  // Mobile Menu Toggle
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navLinks.classList.toggle('active');
   });
 
-  // Close mobile menu on link click
   navLinksItems.forEach(link => {
     link.addEventListener('click', () => {
       hamburger.classList.remove('active');
@@ -29,19 +26,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Track active section for nav highlighting
   function trackActiveSection() {
     const sections = document.querySelectorAll('section');
     let current = '';
-
     sections.forEach(section => {
       const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
       if (window.pageYOffset >= sectionTop - 150) {
         current = section.getAttribute('id');
       }
     });
-
     navLinksItems.forEach(link => {
       link.classList.remove('active');
       if (link.getAttribute('href').substring(1) === current) {
@@ -58,9 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const maxDistance = 150;
 
   class Particle {
-    constructor() {
-      this.init();
-    }
+    constructor() { this.init(); }
     init() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
@@ -86,9 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     particles = [];
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
   }
 
   function animateCanvas() {
@@ -153,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { threshold: 0.1 });
-
   revealElements.forEach(el => revealObserver.observe(el));
 
   // ===== COUNTER ANIMATION =====
@@ -207,57 +195,214 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ===== CHATBOT LOGIC (EMBEDDED DATA) =====
-  let chatbotKnowledge = [
+  // =============================================================
+  //  CHATBOT — ARQUITECTURA RAG (Retrieval-Augmented Generation)
+  // =============================================================
+  //
+  //  PASO 1 — RETRIEVER (TF-IDF en el navegador)
+  //    Convierte la pregunta y los documentos en vectores TF-IDF
+  //    y calcula similitud coseno para recuperar los N fragmentos
+  //    más relevantes de la base de conocimientos (dat.json).
+  //
+  //  PASO 2 — GENERATOR (Groq API / Llama-3)
+  //    Envía la pregunta + el contexto recuperado a la API de Groq
+  //    y devuelve una respuesta natural, coherente y fundamentada.
+  //
+  // =============================================================
+
+  // ── Configuración ──────────────────────────────────────────
+  const GROQ_API_KEY = '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';
+  const GROQ_MODEL   = 'llama-3.3-70b-versatile';
+  const GROQ_URL     = 'https://api.groq.com/openai/v1/chat/completions';
+  const TOP_K        = 3; // fragmentos a recuperar
+
+  // ── Base de conocimientos (dat.json embebida) ───────────────
+  // Cada entrada se convierte en un "documento" para el Retriever
+  const knowledgeBase = [
     {
-      "keywords": ["IA", "programa de computación", "diferencia"],
-      "answers": ["Un programa normal sigue una lista de instrucciones fijas (si pasa A, haz B). La IA aprende de los datos; no se le dan todas las reglas, sino que ella misma identifica patrones para tomar decisiones o generar predicciones ante situaciones nuevas."]
+      keywords: ['IA', 'programa de computación', 'diferencia'],
+      answer: 'Un programa normal sigue una lista de instrucciones fijas (si pasa A, haz B). La IA aprende de los datos; no se le dan todas las reglas, sino que ella misma identifica patrones para tomar decisiones o generar predicciones ante situaciones nuevas.'
     },
     {
-      "keywords": ["Machine Learning", "IA", "aprendizaje automático"],
-      "answers": ["Es una rama de la IA que permite que las máquinas aprendan por sí solas. En lugar de escribir código para cada tarea, le das al sistema miles de ejemplos (datos) y el algoritmo mejora su precisión con el tiempo mediante la experiencia."]
+      keywords: ['Machine Learning', 'aprendizaje automático', 'máquinas aprenden'],
+      answer: 'Es una rama de la IA que permite que las máquinas aprendan por sí solas. En lugar de escribir código para cada tarea, le das al sistema miles de ejemplos (datos) y el algoritmo mejora su precisión con el tiempo mediante la experiencia.'
     },
     {
-      "keywords": ["IA", "sentimientos", "conciencia"],
-      "answers": ["No. En 2026, la IA sigue siendo IA Estrecha. Aunque puede simular empatía o escribir poemas conmovedores, no tiene conciencia, emociones ni alma. Son cálculos matemáticos avanzados procesando lenguaje y probabilidades."]
+      keywords: ['IA', 'sentimientos', 'conciencia', 'emociones', 'alma'],
+      answer: 'No. En 2026, la IA sigue siendo IA Estrecha. Aunque puede simular empatía o escribir poemas conmovedores, no tiene conciencia, emociones ni alma. Son cálculos matemáticos avanzados procesando lenguaje y probabilidades.'
     },
     {
-      "keywords": ["Prompt", "IA", "importancia"],
-      "answers": ["Un Prompt es la instrucción que le das a una IA como ChatGPT o Midjourney. Se ha convertido en una habilidad esencial porque la calidad de lo que la IA entrega depende directamente de qué tan clara, específica y contextual sea la orden que tú le des."]
+      keywords: ['Prompt', 'importancia', 'instrucción', 'ChatGPT', 'Midjourney'],
+      answer: 'Un Prompt es la instrucción que le das a una IA como ChatGPT o Midjourney. Se ha convertido en una habilidad esencial porque la calidad de lo que la IA entrega depende directamente de qué tan clara, específica y contextual sea la orden que tú le des.'
     },
     {
-      "keywords": ["IA", "trabajos", "reemplazar"],
-      "answers": ["Más que reemplazarlos, los está transformando. La IA se encarga de las tareas repetitivas y el análisis de datos masivos, lo que obliga a los humanos a enfocarse en el pensamiento crítico, la creatividad y la supervisión ética de estas herramientas."]
+      keywords: ['trabajos', 'reemplazar', 'empleo', 'automatización', 'futuro laboral'],
+      answer: 'Más que reemplazarlos, los está transformando. La IA se encarga de las tareas repetitivas y el análisis de datos masivos, lo que obliga a los humanos a enfocarse en el pensamiento crítico, la creatividad y la supervisión ética de estas herramientas.'
     },
     {
-      "keywords": ["IA", "alucina", "inventa", "información"],
-      "answers": ["Las alucinaciones ocurren porque los modelos de lenguaje están diseñados para predecir la siguiente palabra más probable, no para verificar la verdad. Si no tienen el dato exacto, el sistema puede generar una respuesta que suena lógica pero es falsa."]
+      keywords: ['alucina', 'inventa', 'información falsa', 'alucinaciones', 'errores'],
+      answer: 'Las alucinaciones ocurren porque los modelos de lenguaje están diseñados para predecir la siguiente palabra más probable, no para verificar la verdad. Si no tienen el dato exacto, el sistema puede generar una respuesta que suena lógica pero es falsa.'
     },
     {
-      "keywords": ["sesgo algorítmico", "IA", "prejuicios"],
-      "answers": ["Es cuando una IA toma decisiones injustas, por ejemplo en procesos de contratación. Esto sucede porque la IA se entrena con datos históricos que ya contienen prejuicios humanos. Si los datos están mal, la IA heredará esos errores."]
+      keywords: ['sesgo algorítmico', 'prejuicios', 'discriminación', 'injusto', 'bias'],
+      answer: 'Es cuando una IA toma decisiones injustas, por ejemplo en procesos de contratación. Esto sucede porque la IA se entrena con datos históricos que ya contienen prejuicios humanos. Si los datos están mal, la IA heredará esos errores.'
     },
     {
-      "keywords": ["IA Débil", "IA Fuerte", "ANI", "AGI"],
-      "answers": ["La IA Débil o ANI está diseñada para una tarea específica como jugar ajedrez o traducir textos, y es la que usamos hoy. La IA Fuerte o AGI es una máquina que igualaría la inteligencia humana en cualquier área, pero todavía es teórica."]
+      keywords: ['IA Débil', 'IA Fuerte', 'ANI', 'AGI', 'Artificial General Intelligence'],
+      answer: 'La IA Débil o ANI está diseñada para una tarea específica como jugar ajedrez o traducir textos, y es la que usamos hoy. La IA Fuerte o AGI es una máquina que igualaría la inteligencia humana en cualquier área, pero todavía es teórica.'
     },
     {
-      "keywords": ["IA", "medio ambiente", "consumo de energía", "IA Verde"],
-      "answers": ["Entrenar y mantener grandes modelos de IA requiere una potencia de cómputo inmensa, lo que genera un alto consumo de energía y agua para enfriar los servidores. Por eso en 2026 la IA Verde o sostenible es una prioridad de desarrollo."]
+      keywords: ['medio ambiente', 'energía', 'sostenible', 'IA Verde', 'consumo energético'],
+      answer: 'Entrenar y mantener grandes modelos de IA requiere una potencia de cómputo inmensa, lo que genera un alto consumo de energía y agua para enfriar los servidores. Por eso en 2026 la IA Verde o sostenible es una prioridad de desarrollo.'
     },
     {
-      "keywords": ["seguridad", "datos", "IA"],
-      "answers": ["Depende de la plataforma. La mayoría de las IAs utilizan tus conversaciones para seguir aprendiendo, por lo que nunca se debe compartir información sensible, financiera o privada a menos que estés en un entorno empresarial con protección de datos garantizada."]
+      keywords: ['seguridad', 'datos', 'privacidad', 'información sensible', 'compartir'],
+      answer: 'Depende de la plataforma. La mayoría de las IAs utilizan tus conversaciones para seguir aprendiendo, por lo que nunca se debe compartir información sensible, financiera o privada a menos que estés en un entorno empresarial con protección de datos garantizada.'
     }
   ];
 
-  console.log('Base de conocimientos cargada localmente:', chatbotKnowledge.length, 'entradas.');
+  // Construir corpus de texto para cada documento
+  const corpus = knowledgeBase.map(entry =>
+    (entry.keywords.join(' ') + ' ' + entry.answer).toLowerCase()
+  );
 
-  const chatToggle = document.getElementById('chatToggle');
-  const chatClose = document.getElementById('chatClose');
-  const chatWindow = document.getElementById('chatWindow');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
+  // ── MÓDULO 1: RETRIEVER (TF-IDF + Cosine Similarity) ───────
+
+  function tokenize(text) {
+    return text
+      .toLowerCase()
+      .replace(/[¿?¡!.,;:()\-"']/g, ' ')
+      .split(/\s+/)
+      .filter(t => t.length > 2);
+  }
+
+  function buildTFIDF(docs) {
+    const N = docs.length;
+    const tfList = [];
+    const df = {};
+
+    // Calcular TF de cada documento
+    for (const doc of docs) {
+      const tokens = tokenize(doc);
+      const tf = {};
+      const total = tokens.length || 1;
+      for (const tok of tokens) {
+        tf[tok] = (tf[tok] || 0) + 1;
+      }
+      // Normalizar por longitud del documento
+      for (const tok in tf) tf[tok] /= total;
+      tfList.push(tf);
+      // Acumular DF
+      for (const tok in tf) df[tok] = (df[tok] || 0) + 1;
+    }
+
+    // Calcular IDF con suavizado
+    const idf = {};
+    for (const tok in df) {
+      idf[tok] = Math.log((N + 1) / (df[tok] + 1)) + 1;
+    }
+
+    // Construir vectores TF-IDF finales
+    const vectors = tfList.map(tf => {
+      const vec = {};
+      for (const tok in tf) vec[tok] = tf[tok] * (idf[tok] || 1);
+      return vec;
+    });
+
+    return { vectors, idf };
+  }
+
+  function vectorizeQuery(query, idf) {
+    const tokens = tokenize(query);
+    if (!tokens.length) return {};
+    const tf = {};
+    for (const tok of tokens) tf[tok] = (tf[tok] || 0) + 1;
+    const total = tokens.length;
+    const vec = {};
+    for (const tok in tf) {
+      vec[tok] = (tf[tok] / total) * (idf[tok] || 1.0);
+    }
+    return vec;
+  }
+
+  function cosineSimilarity(v1, v2) {
+    const common = Object.keys(v1).filter(k => k in v2);
+    if (!common.length) return 0;
+    const dot  = common.reduce((s, k) => s + v1[k] * v2[k], 0);
+    const mag1 = Math.sqrt(Object.values(v1).reduce((s, x) => s + x * x, 0));
+    const mag2 = Math.sqrt(Object.values(v2).reduce((s, x) => s + x * x, 0));
+    return (mag1 && mag2) ? dot / (mag1 * mag2) : 0;
+  }
+
+  // Pre-indexar el corpus
+  const { vectors: docVectors, idf } = buildTFIDF(corpus);
+
+  function retrieve(question, topK = TOP_K) {
+    const qVec = vectorizeQuery(question, idf);
+    const scored = docVectors.map((vec, idx) => ({
+      score: cosineSimilarity(qVec, vec),
+      idx
+    }));
+    scored.sort((a, b) => b.score - a.score);
+
+    const results = [];
+    for (const { score, idx } of scored.slice(0, topK)) {
+      if (score > 0) results.push(knowledgeBase[idx].answer);
+    }
+    return results;
+  }
+
+  // ── MÓDULO 2: GENERATOR (Groq API / Llama-3) ───────────────
+
+  async function generate(question, contextChunks) {
+    const contextStr = contextChunks.length
+      ? contextChunks.map((c, i) => `[Fragmento ${i + 1}]: ${c}`).join('\n\n')
+      : 'No se encontró información específica en la base de conocimientos.';
+
+    const systemPrompt =
+      'Eres un asistente experto en Inteligencia Artificial llamado AI//ASSISTANT_V2, ' +
+      'parte del sistema IA Universe. Respondes usando ÚNICAMENTE la información del contexto proporcionado. ' +
+      'Si el contexto no tiene información suficiente, dilo honestamente. ' +
+      'Responde siempre en español, de forma clara, concisa y conversacional.';
+
+    const userPrompt =
+      `Contexto recuperado de la base de conocimientos:\n${contextStr}\n\n` +
+      `Pregunta del usuario: ${question}\n\n` +
+      'Responde de forma natural y conversacional basándote en el contexto.';
+
+    const response = await fetch(GROQ_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model:       GROQ_MODEL,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user',   content: userPrompt   }
+        ],
+        max_tokens:  512,
+        temperature: 0.4
+      })
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err.error?.message || `Groq API error ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.choices[0].message.content.trim();
+  }
+
+  // ── UI del chatbot ─────────────────────────────────────────
+
+  const chatToggle   = document.getElementById('chatToggle');
+  const chatClose    = document.getElementById('chatClose');
+  const chatWindow   = document.getElementById('chatWindow');
+  const chatInput    = document.getElementById('chatInput');
+  const chatSend     = document.getElementById('chatSend');
   const chatMessages = document.getElementById('chatMessages');
 
   if (chatToggle && chatWindow && chatClose) {
@@ -267,106 +412,112 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     chatClose.addEventListener('click', () => {
       chatWindow.classList.remove('active');
-      setTimeout(() => {
-        chatToggle.style.display = 'flex';
-      }, 300);
+      setTimeout(() => { chatToggle.style.display = 'flex'; }, 300);
     });
   }
 
-  function addMessage(text, side) {
+  function addMessage(text, side, sourcesCount = 0) {
     if (!chatMessages) return;
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const time   = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const msgDiv = document.createElement('div');
     msgDiv.classList.add('message', side);
 
     const content = document.createElement('div');
     content.classList.add('message-content');
     content.textContent = text;
+    msgDiv.appendChild(content);
+
+    // Insignia RAG visible en los mensajes del bot
+    if (side === 'bot' && sourcesCount > 0) {
+      const badge = document.createElement('div');
+      badge.classList.add('rag-badge');
+      badge.title = `RAG: ${sourcesCount} fragmento(s) recuperado(s) de la base de conocimientos`;
+      badge.innerHTML = `<span class="rag-icon">⬡</span> RAG · ${sourcesCount} fuente${sourcesCount > 1 ? 's' : ''}`;
+      msgDiv.appendChild(badge);
+    }
 
     const timeDiv = document.createElement('div');
     timeDiv.classList.add('message-time');
     timeDiv.textContent = time;
-
-    msgDiv.appendChild(content);
     msgDiv.appendChild(timeDiv);
+
     chatMessages.appendChild(msgDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+    return msgDiv;
   }
-  // El manejo de respuestas se realiza dinámicamente mediante el archivo dat.json
 
-  function handleChat() {
+  function showTyping() {
+    if (!chatMessages) return null;
+    const el = document.createElement('div');
+    el.classList.add('message', 'bot', 'typing-indicator');
+    el.innerHTML = `
+      <div class="message-content typing-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="rag-status">⬡ RETRIEVER → calculando similitud TF-IDF...</div>`;
+    chatMessages.appendChild(el);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return el;
+  }
+
+  function updateStatus(el, text) {
+    if (!el) return;
+    const s = el.querySelector('.rag-status');
+    if (s) s.textContent = text;
+  }
+
+  // ── Pipeline RAG completo ───────────────────────────────────
+
+  async function handleChat() {
     if (!chatInput) return;
-    const text = chatInput.value.trim();
-    if (!text) return;
+    const question = chatInput.value.trim();
+    if (!question) return;
 
-    addMessage(text, 'user');
+    addMessage(question, 'user');
     chatInput.value = '';
+    chatSend.disabled = true;
 
-    setTimeout(() => {
-      // Normalizar entrada: quitar puntuación y espacios extra
-      const q = text.toLowerCase()
-        .replace(/[¿?¡!.,]/g, "")
-        .trim();
+    const typingEl = showTyping();
 
-      let matches = [];
-      let maxScore = 0;
+    try {
+      // ── PASO 1: RETRIEVER ──────────────────────────────────
+      // TF-IDF corre en el navegador sobre la base embebida
+      updateStatus(typingEl, '⬡ RETRIEVER → analizando pregunta con TF-IDF...');
+      await new Promise(r => setTimeout(r, 300)); // breve pausa visual
 
-      // Buscar las mejores respuestas basadas en coincidencia de palabras clave
-      chatbotKnowledge.forEach(entry => {
-        let score = 0;
+      const chunks = retrieve(question, TOP_K);
+      console.log(`[RAG] Retriever: ${chunks.length} fragmento(s) recuperado(s)`);
+      chunks.forEach((c, i) => console.log(`  [${i+1}] ${c.slice(0, 80)}...`));
 
-        // 1. Coincidencia por palabras clave (insensible a mayúsculas)
-        entry.keywords.forEach(keyword => {
-          const lowerKeyword = keyword.toLowerCase();
-          if (q.includes(lowerKeyword)) {
-            score += lowerKeyword.split(' ').length * 2;
-          }
-        });
+      // ── PASO 2: GENERATOR ──────────────────────────────────
+      // Llama a Groq con la pregunta + contexto recuperado
+      updateStatus(typingEl, `🤖 GENERATOR → Groq/Llama-3 sintetizando respuesta...`);
 
-        // 2. Coincidencia parcial (si la pregunta es larga) - Insensible a mayúsculas
-        const qWords = q.split(' ');
-        qWords.forEach(word => {
-          if (word.length > 3 && entry.keywords.some(k => k.toLowerCase().includes(word))) {
-            score += 0.5;
-          }
-        });
+      const answer = await generate(question, chunks);
+      typingEl.remove();
 
-        if (score > 0) {
-          if (score > maxScore) {
-            maxScore = score;
-            matches = [entry];
-          } else if (score === maxScore) {
-            matches.push(entry);
-          }
-        }
-      });
+      addMessage(answer, 'bot', chunks.length);
 
-      let response = "";
-      if (matches.length > 0) {
-        // Seleccionar una entrada aleatoria entre las mejores coincidencias
-        const selectedEntry = matches[Math.floor(Math.random() * matches.length)];
-        // Seleccionar una respuesta aleatoria dentro de esa entrada
-        const pool = selectedEntry.answers || [selectedEntry.answer];
-        response = pool[Math.floor(Math.random() * pool.length)];
-      } else {
-        response = "Lo siento, no tengo datos específicos sobre eso. ¿Puedes preguntarme algo sobre la definición de IA, tipos o aplicaciones?";
-      }
-
-      addMessage(response, 'bot');
-    }, 800);
+    } catch (err) {
+      typingEl?.remove();
+      console.error('[RAG] Error:', err);
+      addMessage(
+        `⚠️ Error al conectar con Groq: ${err.message}. Verifica tu conexión a internet.`,
+        'bot'
+      );
+    } finally {
+      chatSend.disabled = false;
+      chatInput.focus();
+    }
   }
 
-  if (chatSend) chatSend.addEventListener('click', handleChat);
-  if (chatInput) {
-    chatInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') handleChat();
-    });
-  }
+  if (chatSend)  chatSend.addEventListener('click', handleChat);
+  if (chatInput) chatInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') handleChat();
+  });
 
-  // Initial Hero counters trigger
+  // Initial Hero counters
   setTimeout(() => {
-    document.querySelectorAll('.stat-number').forEach(counter => {
-      animateCounter(counter);
-    });
+    document.querySelectorAll('.stat-number').forEach(counter => animateCounter(counter));
   }, 500);
 });

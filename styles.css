@@ -480,6 +480,77 @@ body {
   box-shadow: 0 0 15px var(--primary-glow);
 }
 
+/* ===== RAG BADGE ===== */
+.rag-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--primary);
+  letter-spacing: 1px;
+  border: 1px solid rgba(0, 242, 255, 0.25);
+  background: rgba(0, 242, 255, 0.05);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+}
+
+.rag-icon {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+/* ===== TYPING INDICATOR ===== */
+.typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.85rem 1rem !important;
+  min-width: 60px;
+}
+
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  background: var(--primary);
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { opacity: 0.4; transform: translateY(0); }
+  30%            { opacity: 1;   transform: translateY(-5px); }
+}
+
+/* ===== RAG STATUS LINE ===== */
+.rag-status {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--primary);
+  opacity: 0.7;
+  letter-spacing: 1px;
+  margin-top: 0.3rem;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+
+/* ===== DISABLED SEND BUTTON ===== */
+.chat-input-area button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 @media (max-width: 480px) {
   .chat-wrapper {
     right: 1rem;
